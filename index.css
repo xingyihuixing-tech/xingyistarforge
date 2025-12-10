@@ -1,0 +1,174 @@
+/* Global styles - most styles are in index.html inline or via Tailwind */
+
+/* ===== 莫兰迪主题变量 ===== */
+
+/* 深色主题（默认） - 用户可自定义的颜色通过 CSS 变量覆盖 */
+:root, .theme-dark {
+  --bg: var(--custom-dark-bg, #000000);
+  --surface: color-mix(in srgb, var(--bg), #ffffff 4%);
+  --panel: color-mix(in srgb, var(--bg), #ffffff 7%);
+  --border: color-mix(in srgb, var(--bg), #ffffff 16%);
+  
+  --text-1: #EDEAE6;
+  --text-2: #9A958E;
+  --text-disabled: #6B665F;
+  
+  /* 4 类核心视觉元素（默认多巴胺配色 - 青色版） */
+  --ui-primary: var(--custom-primary, #00E5FF);       /* 主交互色（电光青） */
+  --ui-secondary: var(--custom-secondary, #FFD93D);   /* 次交互色（柠檬黄） */
+  --ui-text-accent: var(--custom-text-accent, #FF6EC7); /* 标题强调（霓虹粉 - 互补色） */
+  --ui-decoration: var(--custom-decoration, #9B59B6); /* 装饰线条（紫罗兰） */
+  
+  /* 兼容旧变量名（映射到新变量） */
+  --accent: var(--ui-primary);
+  --accent-hover: color-mix(in srgb, var(--ui-primary), white 20%);
+  --accent-weak: color-mix(in srgb, var(--ui-primary), transparent 70%);
+  --accent-2: var(--ui-secondary);
+  
+  --success: #20A162;
+  --warning: #FF9F43;
+  --danger: #FF6B6B;
+}
+
+/* 浅色主题 */
+.theme-light {
+  --bg: var(--custom-light-bg, #F4F1EC);
+  --surface: color-mix(in srgb, var(--bg), #000000 3%);
+  --panel: color-mix(in srgb, var(--bg), #000000 6%);
+  --border: color-mix(in srgb, var(--bg), #000000 12%);
+  
+  --text-1: #2E2B28;
+  --text-2: #6E6A66;
+  --text-disabled: #A19C96;
+  
+  /* 浅色模式使用相同的自定义色 */
+  --ui-primary: var(--custom-primary, #00E5FF);
+  --ui-secondary: var(--custom-secondary, #FFD93D);
+  --ui-text-accent: var(--custom-text-accent, #FF6EC7);
+  --ui-decoration: var(--custom-decoration, #9B59B6);
+  
+  /* 兼容旧变量名 */
+  --accent: var(--ui-primary);
+  --accent-hover: color-mix(in srgb, var(--ui-primary), black 10%);
+  --accent-weak: color-mix(in srgb, var(--ui-primary), transparent 70%);
+  --accent-2: var(--ui-secondary);
+  
+  --success: #20A162;
+  --warning: #FF9F43;
+  --danger: #FF6B6B;
+}
+
+/* 主题应用到 body */
+body {
+  background-color: var(--bg);
+  color: var(--text-1);
+}
+
+/* ===== Tailwind 颜色覆盖（适配新变量） ===== */
+
+/* 背景色覆盖 */
+.bg-gray-900, .bg-neutral-900, .bg-neutral-900\/90 {
+  background-color: var(--bg) !important;
+}
+.bg-gray-800, .bg-gray-800\/50 {
+  background-color: var(--surface) !important;
+}
+.bg-gray-700 {
+  background-color: var(--panel) !important;
+}
+.bg-gray-600 {
+  background-color: var(--border) !important;
+}
+
+/* 文本色覆盖 */
+.text-gray-500, .text-gray-400 {
+  color: var(--text-2) !important;
+}
+.text-gray-300, .text-gray-200 {
+  color: var(--text-1) !important;
+}
+
+/* 边框色覆盖 */
+.border-white\/10, .border-gray-700, .border-gray-600 {
+  border-color: var(--border) !important;
+}
+
+/* 按钮色覆盖 - 映射到 primary */
+.bg-blue-600 {
+  background-color: var(--ui-primary) !important;
+  color: #fff !important; /* 确保文字对比度 */
+}
+.bg-blue-600:hover, .hover\:bg-blue-500:hover {
+  background-color: var(--accent-hover) !important;
+}
+.bg-blue-600\/50 {
+  background-color: var(--accent-weak) !important;
+}
+
+/* 次级颜色映射 */
+.bg-purple-600 {
+  background-color: var(--ui-decoration) !important;
+  color: #fff !important;
+}
+.bg-orange-600 {
+  background-color: var(--warning) !important;
+  color: #fff !important;
+}
+.bg-green-600, .bg-green-600/80 {
+  background-color: var(--success) !important;
+  color: #fff !important;
+}
+.bg-red-600, .bg-red-600/50 {
+  background-color: var(--danger) !important;
+  color: #fff !important;
+}
+
+/* 标题/强调色 */
+.text-blue-400 {
+  color: var(--ui-text-accent) !important;
+}
+.text-purple-400, .text-purple-300 {
+  color: var(--ui-decoration) !important;
+}
+.text-orange-400, .text-yellow-400 {
+  color: var(--warning) !important;
+}
+.text-green-400 {
+  color: var(--success) !important;
+}
+
+/* 滑块轨道样式 */
+input[type="range"] {
+  background-color: var(--border) !important;
+}
+input[type="range"]::-webkit-slider-thumb {
+  background-color: var(--ui-primary) !important;
+  border: 2px solid var(--panel);
+  border-radius: 50%;
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  background-color: var(--ui-primary) !important;
+  border: 2px solid var(--panel);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* 复选框样式 */
+input[type="checkbox"] {
+  accent-color: var(--ui-primary) !important;
+}
+
+/* 选择框样式 */
+select {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-1) !important;
+}
+
+/* 输入框样式 */
+input[type="text"], input[type="number"] {
+  background-color: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-1) !important;
+}
